@@ -4,7 +4,7 @@ ENC::ENC(uint8_t clk, uint8_t dt){
             CLK = clk;
             DT = dt;
            
-  TCCR1B |= (1 << WGM22)|(1 << CS20)|(1 << CS21); 
+  TCCR2B |= (1 << WGM22)|(1 << CS20)|(1 << CS21); 
   TIMSK2 |= (1 << OCIE2A); 
   OCR2A = 250; // 1 ms
 }
@@ -22,7 +22,7 @@ int ENC::data(bool eneble){
    case 10: enc_a = ((PINB >> 2) & 1);break;
    case 11: enc_a = ((PINB >> 3) & 1);break;
    case 12: enc_a = ((PINB >> 4) & 1);break;
-   case 13: enc_a = ((PINB >> 5) & 1);break;}_delay_us(500);  
+   case 13: enc_a = ((PINB >> 5) & 1);break;}//_delay_us(500);  
   switch(DT){
     case 2: enc_b = ((PIND >> 2) & 1);break;
     case 3: enc_b = ((PIND >> 3) & 1);break;
@@ -43,6 +43,3 @@ int ENC::data(bool eneble){
    if(eneble == 0){enc_data = 0;}
     return enc_data;
 }
-
-
-     
